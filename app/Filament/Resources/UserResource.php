@@ -13,7 +13,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Columns\TextColumn;
-
+use Filament\Forms\Components\TextInput;
 
 
 class UserResource extends Resource
@@ -26,7 +26,18 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                //
+                TextInput::make('name')
+                ->required()
+                ->label('Nombre'),
+
+            TextInput::make('email')
+                ->required()
+                ->email(),
+
+            TextInput::make('password')
+                ->password()
+                ->required()
+                ->label('Contraseña'),
             ]);
     }
 
@@ -56,6 +67,8 @@ class UserResource extends Resource
             ]),
         ]);
 }
+
+
 
 
     public static function getRelations(): array
